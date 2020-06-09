@@ -8,7 +8,6 @@ export default class ServicesContainer extends React.Component {
         this.state = {
             jobs: [],
         };
-        //https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs
     }
 
     componentDidMount() {
@@ -110,7 +109,33 @@ export default class ServicesContainer extends React.Component {
                                     <h3> {item.title} </h3>
                                     <h4> R$ {item.value}</h4>
                                     <p>{item.description}</p>
-                                    <p>Prazo final: {item.dueDate}</p>
+                                    <p>
+                                        Prazo final:{' '}
+                                        {Number(
+                                            new Date(item.dueDate).getDate()
+                                        ) +
+                                            1 +
+                                            '/' +
+                                            (Number(
+                                                new Date(
+                                                    item.dueDate
+                                                ).getMonth()
+                                            ) +
+                                                1 <
+                                            10
+                                                ? '0'
+                                                : '') +
+                                            (Number(
+                                                new Date(
+                                                    item.dueDate
+                                                ).getMonth()
+                                            ) +
+                                                1) +
+                                            '/' +
+                                            new Date(
+                                                item.dueDate
+                                            ).getFullYear()}
+                                    </p>
                                     <p>Métodos de pagamento:</p>
                                     {item.paymentMethods.map(
                                         (paymentMethod) => (
@@ -119,6 +144,9 @@ export default class ServicesContainer extends React.Component {
                                             </span>
                                         )
                                     )}
+
+                                    {/* Prazo de Entrega:
+                                     */}
                                 </ServiceCard>
                             );
                         }
@@ -128,3 +156,5 @@ export default class ServicesContainer extends React.Component {
         );
     }
 }
+
+//(Number(new Date(item.dueDate).getMonth()) + 1) > 10 ? "0" : ""
