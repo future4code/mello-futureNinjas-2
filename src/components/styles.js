@@ -28,4 +28,12 @@ export const Footer = styled.footer`
     img {
         width: 100px;
     }
+
+    p {
+        display: inline;
+    }
+
+    a {
+        color: inherit;
+    }
 `;
