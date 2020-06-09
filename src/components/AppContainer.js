@@ -14,8 +14,44 @@ export class AppContainer extends Component {
                 <Footer>
                     <img src={LogoBIG} alt="" />
                     <p>
-                        Criado por Alexandre Gessone, Ana Irala, Diego Molinari,
-                        Henrique Botelho e Victor Gutierrez
+                        Criado por
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/future4code/Alexandre-Partida"
+                        >
+                            <p> Alexandre Gessone</p>,
+                        </a>{' '}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/future4code/Ana-Irala"
+                        >
+                            <p> Ana Irala</p>,
+                        </a>{' '}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/future4code/Diego-Molinari"
+                        >
+                            <p>Diego Molinari</p>
+                        </a>
+                        ,{' '}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/future4code/Henrique-Botelho"
+                        >
+                            <p>Henrique Botelho</p>
+                        </a>{' '}
+                        e{' '}
+                        <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://github.com/future4code/Victor-Gutierrez"
+                        >
+                            <p>Victor Gutierrez</p>
+                        </a>
                     </p>
                 </Footer>
             </div>
