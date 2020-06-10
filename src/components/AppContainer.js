@@ -82,6 +82,13 @@ export class AppContainer extends Component {
                     }}
                 >
                     <img src={Logo} alt="logo" onClick={this.goToLanding} />
+                    <nav>
+                        <li onClick={this.goToLanding}>Home</li>
+                        <li onClick={this.goToConsumer}>Quero Trabalhar</li>
+                        <li onClick={this.goToConsumer}>
+                            Quero criar uma oferta
+                        </li>
+                    </nav>
                 </Header>
                 {this.handlePageSwitch()}
                 <Footer
