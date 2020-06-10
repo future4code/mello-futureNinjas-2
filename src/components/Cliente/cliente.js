@@ -30,11 +30,12 @@ export default class Cliente extends Component {
         return (
             <>
                 <Fab
-                    style={{ position: 'fixed', left: 25, top: 120 }}
+                    style={{ position: 'sticky', left: 5, top: 10 }}
                     variant="extended"
                     onClick={() =>
                         this.setState({ toggle: !this.state.toggle })
                     }
+                    href="#filters"
                 >
                     Filtros
                 </Fab>
@@ -43,7 +44,7 @@ export default class Cliente extends Component {
                         display: this.state.toggle === true ? 'flex' : 'none',
                     }}
                 >
-                    <span>
+                    <span id="filters">
                         <TextField
                             iid="standard-basic"
                             label="Busque um serviço"
