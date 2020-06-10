@@ -117,6 +117,8 @@ export class Profissional extends Component {
         this.setState({description : newDescription});
     };
 
+
+    
     handleValueChange = (evento) => {
         const newValue = event.target.value;
         this.setState({value : newValue});
