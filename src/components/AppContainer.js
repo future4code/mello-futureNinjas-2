@@ -11,7 +11,7 @@ import Logo from '../assets/logo.svg';
 import LogoBIG from '../assets/logoBIG.svg';
 import LandingPage from './../pages/LandingPage';
 import Consumidor from './../pages/Consumidor';
-import Profissional from '../pages/LandingPage';
+import Profissional from '../pages/Profissional';
 
 export class AppContainer extends Component {
     constructor(props) {
