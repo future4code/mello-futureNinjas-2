@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ServicesContainer from './../ContainerServiços/containerservicos';
 import { Container } from './styles';
-import { Fab } from '@material-ui/core';
+import { Fab, TextField } from '@material-ui/core';
 
 export default class Cliente extends Component {
     constructor(props) {
@@ -44,26 +44,27 @@ export default class Cliente extends Component {
                     }}
                 >
                     <span>
-                        <label htmlFor="">Busque um serviço</label>
-                        <input
+                        <TextField
+                            iid="standard-basic"
+                            label="Busque um serviço"
                             type="text"
                             value={this.state.search}
                             onChange={this.handleSearch}
                         />
                     </span>
                     <span>
-                        <label htmlFor="">Pagamento mínimo</label>
-                        <input
+                        <TextField
+                            id="standard-basic"
+                            label="Valor Mínimo"
                             onChange={this.handleValMin}
-                            value={this.state.valMin}
                             type="number"
                         />
                     </span>
                     <span>
-                        <label htmlFor="">Pagamento máximo</label>
-                        <input
+                        <TextField
+                            id="standard-basic"
+                            label="Valor Máximo"
                             onChange={this.handleValMax}
-                            value={this.state.valMax}
                             type="number"
                         />
                     </span>

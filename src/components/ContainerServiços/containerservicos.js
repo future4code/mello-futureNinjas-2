@@ -13,7 +13,7 @@ import {
 import CardContent from '@material-ui/core/CardContent';
 
 import Typography from '@material-ui/core/Typography';
-import { Fab } from '@material-ui/core';
+import { Fab, Select, MenuItem } from '@material-ui/core';
 
 export default class ServicesContainer extends React.Component {
     constructor(props) {
@@ -153,27 +153,27 @@ export default class ServicesContainer extends React.Component {
                 <Filters>
                     <span>
                         <label htmlFor="">Ordene por valor</label>
-                        <select onChange={this.sortItemsbyValue} name="" id="">
-                            <option value="0"></option>
-                            <option value="crescente">
+                        <Select
+                            id="select"
+                            onChange={this.sortItemsbyValue}
+                            name=""
+                        >
+                            <MenuItem value="0"></MenuItem>
+                            <MenuItem value="crescente">
                                 Ordem de valor crescente
-                            </option>
-                            <option value="decrescente">
+                            </MenuItem>
+                            <MenuItem value="decrescente">
                                 Ordem de valor decrescente
-                            </option>
-                        </select>
+                            </MenuItem>
+                        </Select>
                     </span>
                     <span>
                         <label htmlFor="">Ordene por Título</label>
-                        <select onChange={this.sortItemsbyTitle} name="" id="">
-                            <option value="0"></option>
-                            <option value="crescente">
-                                Ordem de valor do serviço crescente
-                            </option>
-                            <option value="decrescente">
-                                Ordem de valor do serviço decrescente
-                            </option>
-                        </select>
+                        <Select onChange={this.sortItemsbyTitle} name="" id="">
+                            <MenuItem value="0"></MenuItem>
+                            <MenuItem value="crescente">A-Z</MenuItem>
+                            <MenuItem value="decrescente">Z-A</MenuItem>
+                        </Select>
                     </span>
                 </Filters>
                 <FabSetter>
