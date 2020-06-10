@@ -16,7 +16,7 @@ export class Profissional extends Component {
             description: this.state.description,
             value: Number(this.state.value),
             paymentMethods: this.state.paymentMethods.split(','),
-            dueDate: Number(this.state.dueDate),
+            dueDate: this.state.dueDate,
         };
 
         axios
@@ -59,12 +59,7 @@ export class Profissional extends Component {
 
     handleDateChange = (event) => {
         this.setState({ dueDate: event.target.value });
-        console.log(
-            this.state.title,
-            this.state.dueDate,
-            this.state.description,
-            this.state.title
-        );
+        console.log(this.state.dueDate);
     };
 
     render() {
@@ -110,6 +105,7 @@ export class Profissional extends Component {
                             value={this.state.dueDate}
                             onChange={this.handleDateChange}
                             placeholder="Data"
+                            type="date"
                         ></input>
                     </p>
 
