@@ -31,7 +31,7 @@ export const ServiceCard = styled.div`
     }
 
     span > button {
-        margin-top: 100px;
+        margin-top: 55px;
         padding: 10px;
         outline: none;
         border: 1px solid #d8bb95;
@@ -155,7 +155,8 @@ export const CartCards = styled.div`
     background: #ffffff;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 1px #00000021;
-    word-wrap: wrap;
+
+    word-wrap: break-word;
     flex-direction: column;
 
     button {

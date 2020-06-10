@@ -13,7 +13,7 @@ import {
 import CardContent from '@material-ui/core/CardContent';
 
 import Typography from '@material-ui/core/Typography';
-import { Fab, Select, MenuItem } from '@material-ui/core';
+import { Fab, NativeSelect } from '@material-ui/core';
 
 export default class ServicesContainer extends React.Component {
     constructor(props) {
@@ -38,15 +38,9 @@ export default class ServicesContainer extends React.Component {
     }
 
     componentDidUpdate() {
-        axios
-            .get(
-                'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs'
-            )
-            .then((response) => {
-                this.setState({
-                    jobs: response.data.jobs.map((item) => item),
-                });
-            });
+        axios.get(
+            'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs'
+        );
     }
 
     newMethod = () => {
@@ -153,27 +147,27 @@ export default class ServicesContainer extends React.Component {
                 <Filters>
                     <span>
                         <label htmlFor="">Ordene por valor</label>
-                        <Select
-                            id="select"
-                            onChange={this.sortItemsbyValue}
-                            name=""
-                        >
-                            <MenuItem value="0"></MenuItem>
-                            <MenuItem value="crescente">
+                        <NativeSelect onChange={this.sortItemsbyValue} name="">
+                            <option value="0"></option>
+                            <option value="crescente">
                                 Ordem de valor crescente
-                            </MenuItem>
-                            <MenuItem value="decrescente">
+                            </option>
+                            <option value="decrescente">
                                 Ordem de valor decrescente
-                            </MenuItem>
-                        </Select>
+                            </option>
+                        </NativeSelect>
                     </span>
                     <span>
                         <label htmlFor="">Ordene por Título</label>
-                        <Select onChange={this.sortItemsbyTitle} name="" id="">
-                            <MenuItem value="0"></MenuItem>
-                            <MenuItem value="crescente">A-Z</MenuItem>
-                            <MenuItem value="decrescente">Z-A</MenuItem>
-                        </Select>
+                        <NativeSelect
+                            onChange={this.sortItemsbyTitle}
+                            name=""
+                            id=""
+                        >
+                            <option value="0"></option>
+                            <option value="crescente">A-Z</option>
+                            <option value="decrescente">Z-A</option>
+                        </NativeSelect>
                     </span>
                 </Filters>
                 <FabSetter>
@@ -248,11 +242,14 @@ export default class ServicesContainer extends React.Component {
                             item.value >= this.props.valMin
                         ) {
                             return (
-                                <ServiceCard key={item.id}>
+                                <ServiceCard
+                                    style={{
+                                        wordBreak: 'break-all',
+                                    }}
+                                    key={item.id}
+                                >
                                     <CardContent>
-                                        <Typography variant="h5" gutterBottom>
-                                            {item.title}
-                                        </Typography>
+                                        <h3>{item.title}</h3>
                                         <Typography
                                             variant="body2"
                                             component="p"
