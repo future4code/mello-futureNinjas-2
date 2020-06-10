@@ -88,10 +88,10 @@ export default class ServicesContainer extends React.Component {
                         <select onChange={this.sortItemsbyTitle} name="" id="">
                             <option value="0"></option>
                             <option value="crescente">
-                                Ordem de valor crescente
+                                Ordem de valor do serviço crescente
                             </option>
                             <option value="decrescente">
-                                Ordem de valor decrescente
+                                Ordem de valor do serviço decrescente
                             </option>
                         </select>
                     </span>

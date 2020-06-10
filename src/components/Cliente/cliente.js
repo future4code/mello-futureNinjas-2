@@ -32,25 +32,22 @@ export default class Cliente extends Component {
                         <label htmlFor="">Busque um serviço</label>
                         <input
                             type="text"
-                            placeholder="Busque por um serviço"
                             value={this.state.search}
                             onChange={this.handleSearch}
                         />
                     </span>
                     <span>
-                        <label htmlFor="">Valor mínimo</label>
+                        <label htmlFor="">Pagamento mínimo</label>
                         <input
                             onChange={this.handleValMin}
-                            placeholder="Valor mínimo"
                             value={this.state.valMin}
                             type="number"
                         />
                     </span>
                     <span>
-                        <label htmlFor="">Valor máximo</label>
+                        <label htmlFor="">Pagamento máximo</label>
                         <input
                             onChange={this.handleValMax}
-                            placeholder="Valor máximo"
                             value={this.state.valMax}
                             type="number"
                         />

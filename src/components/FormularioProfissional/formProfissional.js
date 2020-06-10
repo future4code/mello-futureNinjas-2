@@ -104,7 +104,6 @@ export class Formulário extends Component {
                 console.log('deu errado!');
             });
     }; */
-    
 
     //////////////////// Funções aqui
 

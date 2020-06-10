@@ -27,12 +27,10 @@ export class AppContainer extends Component {
 
     goToConsumer = () => {
         this.setState({ pages: 1 });
-        console.log(this.state.pages);
     };
 
     goToProfessional = () => {
         this.setState({ pages: 2 });
-        console.log(this.state.pages);
     };
 
     handlePageSwitch = () => {
@@ -45,10 +43,10 @@ export class AppContainer extends Component {
                         />
                         <BtnWrapper>
                             <BotaoRosa onClick={this.goToConsumer}>
-                                Quero contratar
+                                Quero me candidatar
                             </BotaoRosa>
                             <BotaoVerde onClick={this.goToProfessional}>
-                                Quero trabalhar
+                                Quero criar uma oferta
                             </BotaoVerde>
                         </BtnWrapper>
                     </Wrapper>
