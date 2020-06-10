@@ -21,6 +21,10 @@ export class AppContainer extends Component {
         };
     }
 
+    goToLanding = () => {
+        this.setState({ pages: 0 });
+    };
+
     goToConsumer = () => {
         this.setState({ pages: 1 });
         console.log(this.state.pages);
@@ -36,7 +40,9 @@ export class AppContainer extends Component {
             case 0:
                 return (
                     <Wrapper>
-                        <LandingPage />
+                        <LandingPage
+                            style={{ display: this.ShouldIRender() }}
+                        />
                         <BtnWrapper>
                             <BotaoRosa onClick={this.goToConsumer}>
                                 Quero contratar
@@ -56,14 +62,32 @@ export class AppContainer extends Component {
         }
     };
 
+    ShouldIRender = () => {
+        return this.state.pages === 0 ? 'none' : 'flex';
+    };
+
+    WhichColor = () => {
+        return this.state.pages === 1 ? '#d8bb95' : '#82b08b';
+    };
+
     render() {
         return (
             <div>
-                <Header style={{ display: 'none' }}>
-                    <img src={Logo} alt="" />
+                <Header
+                    style={{
+                        display: this.ShouldIRender(),
+                        backgroundColor: this.WhichColor(),
+                    }}
+                >
+                    <img src={Logo} alt="logo" onClick={this.goToLanding} />
                 </Header>
                 {this.handlePageSwitch()}
-                <Footer style={{ display: 'none' }}>
+                <Footer
+                    style={{
+                        display: this.ShouldIRender(),
+                        backgroundColor: this.WhichColor(),
+                    }}
+                >
                     <img src={LogoBIG} alt="" />
                     <p>
                         Criado por

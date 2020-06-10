@@ -18,25 +18,12 @@ const Logo = styled.img`
 `;
 
 class LandingPage extends Component {
-    state = {
-        telaConsumidor: false,
-        telaProfissional: false,
-    };
-
     render() {
         return (
             <Home>
                 <Logo src={require('../assets/logoBIG.svg')} />
             </Home>
         );
-    }
-
-    VaiParaConsumidor(params) {
-        console.log('gg');
-    }
-
-    VaiParaProfissional(params) {
-        console.log('hi');
     }
 }
 

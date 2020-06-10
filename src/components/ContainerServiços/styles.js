@@ -5,6 +5,7 @@ export const Container = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    min-height: 1000px;
 `;
 
 export const ServiceCard = styled.div`

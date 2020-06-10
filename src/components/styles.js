@@ -12,6 +12,7 @@ export const Header = styled.header`
         position: relative;
         left: 100px;
         bottom: 10%;
+        cursor: pointer;
     }
 `;
 
@@ -45,6 +46,7 @@ export const BotaoRosa = styled.button`
     color: #fff;
     font-size: 20px;
     border-radius: 12px;
+    cursor: pointer;
 `;
 
 export const BotaoVerde = styled.button`
@@ -54,6 +56,7 @@ export const BotaoVerde = styled.button`
     color: #fff;
     font-size: 20px;
     border-radius: 12px;
+    cursor: pointer;
 `;
 
 export const BtnWrapper = styled.div`
