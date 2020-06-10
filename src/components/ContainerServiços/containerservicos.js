@@ -1,16 +1,43 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, ServiceCard, Filters } from './styles';
+import {
+    Container,
+    Filters,
+    JobCart,
+    FabSetter,
+    ServiceCard,
+    PaymentOption,
+    CartCards,
+} from './styles';
+
+import CardContent from '@material-ui/core/CardContent';
+
+import Typography from '@material-ui/core/Typography';
+import { Fab } from '@material-ui/core';
 
 export default class ServicesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             jobs: [],
+            takenJobs: [],
+            show: false,
         };
     }
 
     componentDidMount() {
+        axios
+            .get(
+                'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs'
+            )
+            .then((response) => {
+                this.setState({
+                    jobs: response.data.jobs.map((item) => item),
+                });
+            });
+    }
+
+    componentDidUpdate() {
         axios
             .get(
                 'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs'
@@ -67,6 +94,59 @@ export default class ServicesContainer extends React.Component {
         }
     };
 
+    handleTakeJob(id) {
+        axios.put(
+            `https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs/${id}/giveup`
+        );
+
+        const searchInJobs = this.state.jobs.findIndex(
+            (item) => item.id === id
+        );
+
+        const searchInTakenJobs = this.state.takenJobs.findIndex(
+            (item) => item.id === id
+        );
+
+        if (searchInTakenJobs === -1) {
+            this.setState({
+                takenJobs: [
+                    ...this.state.takenJobs,
+                    this.state.jobs[searchInJobs],
+                ],
+            });
+        } else {
+            return;
+        }
+    }
+
+    handleGiveUpJob = (id) => {
+        axios.put(
+            `https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs/${id}/giveup`
+        );
+
+        console.log(this.state.takenJobs);
+
+        const searchInTakenJobs = this.state.takenJobs.findIndex(
+            (item) => item.id === id
+        );
+
+        if (searchInTakenJobs === -1) {
+            return;
+        } else {
+            this.state.takenJobs.splice(searchInTakenJobs, 1);
+            this.setState({ takenJobs: [...this.state.takenJobs] });
+        }
+    };
+
+    takeAllJobs = () => {
+        for (let items of this.state.takenJobs) {
+            axios.delete(
+                `https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs/${items.id}`
+            );
+        }
+        this.setState({ takenJobs: [] });
+    };
+
     render() {
         return (
             <>
@@ -96,21 +176,29 @@ export default class ServicesContainer extends React.Component {
                         </select>
                     </span>
                 </Filters>
-
-                <Container>
-                    {this.state.jobs.map((item) => {
-                        if (
-                            item.title.match(this.newMethod()) &&
-                            item.value <= this.props.valMax &&
-                            item.value >= this.props.valMin
-                        ) {
-                            return (
-                                <ServiceCard key={item.id}>
-                                    <h3> {item.title} </h3>
-                                    <h4> R$ {item.value}</h4>
-                                    <p>{item.description}</p>
+                <FabSetter>
+                    <i>{this.state.takenJobs.length}</i>
+                    <Fab
+                        variant="extended"
+                        onClick={() =>
+                            this.setState({ show: !this.state.show })
+                        }
+                    >
+                        Seus trabalhos
+                    </Fab>
+                </FabSetter>
+                <JobCart
+                    style={{
+                        display: this.state.show === true ? 'block' : 'none',
+                    }}
+                >
+                    <div>
+                        {this.state.takenJobs.map((item) => (
+                            <>
+                                <CartCards>
+                                    <p>{item.title}</p>
                                     <p>
-                                        Prazo final:{' '}
+                                        Prazo:{' '}
                                         {Number(
                                             new Date(item.dueDate).getDate()
                                         ) +
@@ -136,17 +224,95 @@ export default class ServicesContainer extends React.Component {
                                                 item.dueDate
                                             ).getFullYear()}
                                     </p>
-                                    <p>Métodos de pagamento:</p>
-                                    {item.paymentMethods.map(
-                                        (paymentMethod) => (
-                                            <span style={{ listStyle: 'none' }}>
-                                                {paymentMethod}
-                                            </span>
-                                        )
-                                    )}
+                                    <p>Pagamento: R${item.value}</p>
+                                    <button
+                                        onClick={() =>
+                                            this.handleGiveUpJob(item.id)
+                                        }
+                                    >
+                                        Excluir
+                                    </button>
+                                </CartCards>
+                            </>
+                        ))}
+                    </div>
+                    <button onClick={this.takeAllJobs}>
+                        ACEITAR TRABALHOS
+                    </button>
+                </JobCart>
+                <Container>
+                    {this.state.jobs.map((item) => {
+                        if (
+                            item.title.match(this.newMethod()) &&
+                            item.value <= this.props.valMax &&
+                            item.value >= this.props.valMin
+                        ) {
+                            return (
+                                <ServiceCard key={item.id}>
+                                    <CardContent>
+                                        <Typography variant="h5" gutterBottom>
+                                            {item.title}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            component="p"
+                                        >
+                                            R$ {item.value}
+                                        </Typography>
+                                        <Typography
+                                            variant="body2"
+                                            component="p"
+                                        >
+                                            {item.description}
+                                        </Typography>
+                                        <p>
+                                            Prazo final:{' '}
+                                            {Number(
+                                                new Date(item.dueDate).getDate()
+                                            ) +
+                                                1 +
+                                                '/' +
+                                                (Number(
+                                                    new Date(
+                                                        item.dueDate
+                                                    ).getMonth()
+                                                ) +
+                                                    1 <
+                                                10
+                                                    ? '0'
+                                                    : '') +
+                                                (Number(
+                                                    new Date(
+                                                        item.dueDate
+                                                    ).getMonth()
+                                                ) +
+                                                    1) +
+                                                '/' +
+                                                new Date(
+                                                    item.dueDate
+                                                ).getFullYear()}
+                                        </p>
+                                        <p>Métodos de pagamento:</p>
+                                        {item.paymentMethods.map(
+                                            (paymentMethod) => (
+                                                <PaymentOption>
+                                                    {paymentMethod}
+                                                </PaymentOption>
+                                            )
+                                        )}
 
-                                    {/* Prazo de Entrega:
-                                     */}
+                                        <span>
+                                            <button
+                                                variant="outlined"
+                                                color="primary"
+                                                onClick={() =>
+                                                    this.handleTakeJob(item.id)
+                                                }
+                                            >
+                                                PEGAR TRABALHO
+                                            </button>
+                                        </span>
+                                    </CardContent>
                                 </ServiceCard>
                             );
                         }
@@ -156,5 +322,3 @@ export default class ServicesContainer extends React.Component {
         );
     }
 }
-
-//(Number(new Date(item.dueDate).getMonth()) + 1) > 10 ? "0" : ""

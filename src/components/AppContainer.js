@@ -17,7 +17,7 @@ export class AppContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            pages: 0,
+            pages: JSON.parse(Number(localStorage.getItem('page'))) || 0,
         };
     }
 
@@ -32,6 +32,10 @@ export class AppContainer extends Component {
     goToProfessional = () => {
         this.setState({ pages: 2 });
     };
+
+    componentDidUpdate() {
+        localStorage.setItem('page', JSON.stringify(this.state.pages));
+    }
 
     handlePageSwitch = () => {
         switch (this.state.pages) {
@@ -87,7 +91,7 @@ export class AppContainer extends Component {
                     }}
                 >
                     <img src={LogoBIG} alt="" />
-                    <p>
+                    <div>
                         Criado por
                         <a
                             target="_blank"
@@ -126,7 +130,7 @@ export class AppContainer extends Component {
                         >
                             <p>Victor Gutierrez</p>
                         </a>
-                    </p>
+                    </div>
                 </Footer>
             </div>
         );

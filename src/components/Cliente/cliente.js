@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ServicesContainer from './../ContainerServiços/containerservicos';
 import { Container } from './styles';
+import { Fab } from '@material-ui/core';
 
 export default class Cliente extends Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class Cliente extends Component {
             search: '',
             valMax: 10000,
             valMin: 0,
+            toggle: false,
         };
     }
 
@@ -27,7 +29,20 @@ export default class Cliente extends Component {
     render() {
         return (
             <>
-                <Container>
+                <Fab
+                    style={{ position: 'fixed', left: 25, top: 120 }}
+                    variant="extended"
+                    onClick={() =>
+                        this.setState({ toggle: !this.state.toggle })
+                    }
+                >
+                    Filtros
+                </Fab>
+                <Container
+                    style={{
+                        display: this.state.toggle === true ? 'flex' : 'none',
+                    }}
+                >
                     <span>
                         <label htmlFor="">Busque um serviço</label>
                         <input
