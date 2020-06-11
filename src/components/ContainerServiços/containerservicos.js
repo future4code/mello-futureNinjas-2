@@ -14,6 +14,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 import Typography from '@material-ui/core/Typography';
 import { Fab, NativeSelect } from '@material-ui/core';
+import { parseISO, format } from 'date-fns';
 
 export default class ServicesContainer extends React.Component {
     constructor(props) {
@@ -67,7 +68,7 @@ export default class ServicesContainer extends React.Component {
                     if (a.title.toLowerCase() < b.title.toLowerCase()) {
                         return -1;
                     }
-                    if (a.title > b.title) {
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
                         return 1;
                     }
                     return 0;
@@ -80,6 +81,34 @@ export default class ServicesContainer extends React.Component {
                         return 1;
                     }
                     if (a.title.toLowerCase() > b.title.toLowerCase()) {
+                        return -1;
+                    }
+                    return 0;
+                }),
+            });
+        }
+    };
+
+    sortItemsbyDueDate = (e) => {
+        if (e.target.value === 'crescente') {
+            this.setState({
+                jobs: [...this.state.jobs].sort(function (a, b) {
+                    if (Date.parse(a.dueDate) < Date.parse(b.dueDate)) {
+                        return -1;
+                    }
+                    if (Date.parse(a.dueDate) > Date.parse(b.dueDate)) {
+                        return 1;
+                    }
+                    return 0;
+                }),
+            });
+        } else if (e.target.value === 'decrescente') {
+            this.setState({
+                jobs: [...this.state.jobs].sort(function (a, b) {
+                    if (Date.parse(a.dueDate) < Date.parse(b.dueDate)) {
+                        return 1;
+                    }
+                    if (Date.parse(a.dueDate) > Date.parse(b.dueDate)) {
                         return -1;
                     }
                     return 0;
@@ -164,6 +193,18 @@ export default class ServicesContainer extends React.Component {
                             </option>
                         </NativeSelect>
                     </span>
+
+                    <span>
+                        <label htmlFor="">Ordene por prazo</label>
+                        <NativeSelect
+                            onChange={this.sortItemsbyDueDate}
+                            name=""
+                        >
+                            <option value="0"></option>
+                            <option value="crescente">Mais próximos</option>
+                            <option value="decrescente">Mais distantes</option>
+                        </NativeSelect>
+                    </span>
                     <span>
                         <label htmlFor="">Ordene por Título</label>
                         <NativeSelect
@@ -203,7 +244,6 @@ export default class ServicesContainer extends React.Component {
                                         {Number(
                                             new Date(item.dueDate).getDate()
                                         ) +
-                                            1 +
                                             '/' +
                                             (Number(
                                                 new Date(
@@ -273,30 +313,10 @@ export default class ServicesContainer extends React.Component {
                                         </Typography>
                                         <p>
                                             Prazo final:{' '}
-                                            {Number(
-                                                new Date(item.dueDate).getDate()
-                                            ) +
-                                                1 +
-                                                '/' +
-                                                (Number(
-                                                    new Date(
-                                                        item.dueDate
-                                                    ).getMonth()
-                                                ) +
-                                                    1 <
-                                                10
-                                                    ? '0'
-                                                    : '') +
-                                                (Number(
-                                                    new Date(
-                                                        item.dueDate
-                                                    ).getMonth()
-                                                ) +
-                                                    1) +
-                                                '/' +
-                                                new Date(
-                                                    item.dueDate
-                                                ).getFullYear()}
+                                            {format(
+                                                parseISO(item.dueDate),
+                                                "'Dia' dd 'de' MMMM 'de' yyyy'"
+                                            )}
                                         </p>
                                         <p>Métodos de pagamento:</p>
                                         {item.paymentMethods.map(

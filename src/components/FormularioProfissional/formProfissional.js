@@ -4,6 +4,8 @@ import { Container } from './styles';
 import { TextField } from '@material-ui/core';
 import { ServiceCard } from '../ContainerServiços/styles';
 import Logo from '../../assets/logoBIG.svg';
+import isFuture from 'date-fns/isFuture';
+import { parseISO, format } from 'date-fns';
 
 export class Profissional extends Component {
     state = {
@@ -15,34 +17,46 @@ export class Profissional extends Component {
     };
 
     handleCreateJob = () => {
-        const body = {
-            title: this.state.title,
-            description: this.state.description,
-            value: Number(this.state.value),
-            paymentMethods: this.state.paymentMethods.split(','),
-            dueDate: this.state.dueDate,
-        };
+        if (isFuture(this.state.dueDate)) {
+            alert('Essa data já passou ou não está disponível.');
+        } else if (this.state.description === '') {
+            alert('Adicione uma descrição ao serviço que você deseja.');
+        } else if (this.state.value === '') {
+            alert('Adicione um valor ao serviço que você deseja.');
+        } else if (this.state.paymentMethods === '') {
+            alert('Adicione pelo menos um método de pagamento.');
+        } else if (this.state.dueDate === '') {
+            alert('Adicione uma data final para seu serviço.');
+        } else {
+            const body = {
+                title: this.state.title,
+                description: this.state.description,
+                value: Number(this.state.value),
+                paymentMethods: this.state.paymentMethods.split(','),
+                dueDate: this.state.dueDate,
+            };
 
-        axios
-            .post(
-                'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs',
-                body
-            )
-            .then(() => {
-                this.setState({
-                    title: '',
-                    description: '',
-                    value: '',
-                    paymentMethods: '',
-                    dueDate: '',
+            axios
+                .post(
+                    'https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs',
+                    body
+                )
+                .then(() => {
+                    this.setState({
+                        title: '',
+                        description: '',
+                        value: '',
+                        paymentMethods: '',
+                        dueDate: '',
+                    });
+                    alert('Sua oferta de trabalho foi registrada!');
+                })
+                .catch((error) => {
+                    alert(
+                        'Houve um erro, certifique-se de atender aos requisitos de formato'
+                    );
                 });
-                alert('Sua oferta de trabalho foi registrada!');
-            })
-            .catch((error) => {
-                alert(
-                    'Houve um erro, certifique-se de atender aos requisitos de formato'
-                );
-            });
+        }
     };
 
     //////////////////// Funções aqui
@@ -80,19 +94,13 @@ export class Profissional extends Component {
                     </h4>
                     <h4>{this.state.paymentMethods}</h4>
                     <h4>
-                        {this.state.dueDate.length > 0 ? "Prazo Final: " + (Number(new Date(this.state.dueDate).getDate()) +
-                            1 +
-                            '/' +
-                            (Number(new Date(this.state.dueDate).getMonth()) +
-                                1 <
-                            10
-                                ? '0'
-                                : '') +
-                            (Number(new Date(this.state.dueDate).getMonth()) +
-                                1) +
-                            '/' +
-                            new Date(this.state.dueDate).getFullYear())  : ''}
-                        
+                        {this.state.dueDate.length > 0
+                            ? 'Prazo Final: ' +
+                              format(
+                                  parseISO(this.state.dueDate),
+                                  "'Dia' dd 'de' MMMM 'de' yyyy'"
+                              )
+                            : ''}
                     </h4>
                     <img src={Logo} alt="logo" />
                 </ServiceCard>
@@ -100,7 +108,6 @@ export class Profissional extends Component {
                 <div>
                     <span>
                         <TextField
-                            id="standard-basic"
                             label="O nome do seu serviço"
                             value={this.state.title}
                             onChange={this.handleTitleChange}
@@ -108,7 +115,6 @@ export class Profissional extends Component {
                     </span>
                     <span>
                         <TextField
-                            id="standard-basic"
                             label="A descrição do seu serviço"
                             value={this.state.description}
                             onChange={this.handleDescriptionChange}
@@ -116,17 +122,16 @@ export class Profissional extends Component {
                     </span>
                     <span>
                         <TextField
-                            id="standard-basic"
                             label="O preço do seu serviço"
                             title="Lembre-se de digitar o valor em Reais (BRL)"
                             value={this.state.value}
                             onChange={this.handleValueChange}
+                            type="number"
                         ></TextField>
                     </span>
 
                     <span>
                         <TextField
-                            id="standard-basic"
                             label="Métodos de pagamento"
                             title="Lembre-se de separá-los por vírgula"
                             value={this.state.paymentMethods}
