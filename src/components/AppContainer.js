@@ -85,8 +85,8 @@ export class AppContainer extends Component {
                     <nav>
                         <li onClick={this.goToLanding}>Home</li>
                         <li onClick={this.goToConsumer}>Quero Trabalhar</li>
-                        <li onClick={this.goToConsumer}>
-                            Quero criar uma oferta
+                        <li onClick={this.goToProfessional}>
+                            Quero Criar Uma Oferta
                         </li>
                     </nav>
                 </Header>

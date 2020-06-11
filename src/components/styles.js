@@ -24,6 +24,11 @@ export const Header = styled.header`
     nav * {
         margin: 0 15px;
         font-weight: bold;
+        cursor: pointer;
+    }
+
+    nav *:hover {
+        color: white;
     }
 `;
 

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Container } from './styles';
+import { TextField } from '@material-ui/core';
+import { ServiceCard } from '../ContainerServiços/styles';
+import Logo from '../../assets/logoBIG.svg';
 
 export class Profissional extends Component {
     state = {
@@ -32,10 +36,12 @@ export class Profissional extends Component {
                     paymentMethods: '',
                     dueDate: '',
                 });
-                console.log('deu certo!');
+                alert('Sua oferta de trabalho foi registrada!');
             })
             .catch((error) => {
-                console.log('erro!');
+                alert(
+                    'Houve um erro, certifique-se de atender aos requisitos de formato'
+                );
             });
     };
 
@@ -64,58 +70,77 @@ export class Profissional extends Component {
 
     render() {
         return (
-            <div>
-                <div>Texto sobre o produto</div>
+            <Container>
+                <ServiceCard style={{ padding: 20 }}>
+                    <h2>{this.state.title}</h2>
+                    <h4>{this.state.description}</h4>
+                    <h4>
+                        {this.state.value.length > 0 ? 'R$' : ''}
+                        {this.state.value}
+                    </h4>
+                    <h4>{this.state.paymentMethods}</h4>
+                    <h4>
+                        {this.state.dueDate.length > 0 ? 'Prazo Final: ' : ''}
+                        {this.state.dueDate}
+                    </h4>
+                    <img src={Logo} alt="logo" />
+                </ServiceCard>
 
                 <div>
-                    <p>
-                        <input
+                    <span>
+                        <TextField
+                            id="standard-basic"
+                            label="O nome do seu serviço"
                             value={this.state.title}
                             onChange={this.handleTitleChange}
-                            placeholder="Trabalho"
-                        ></input>
-                    </p>
-
-                    <p>
-                        <input
+                        ></TextField>
+                    </span>
+                    <span>
+                        <TextField
+                            id="standard-basic"
+                            label="A descrição do seu serviço"
                             value={this.state.description}
                             onChange={this.handleDescriptionChange}
-                            placeholder="Descrição"
-                        ></input>
-                    </p>
-
-                    <p>
-                        <input
+                        ></TextField>
+                    </span>
+                    <span>
+                        <TextField
+                            id="standard-basic"
+                            label="O preço do seu serviço"
+                            title="Lembre-se de digitar o valor em Reais (BRL)"
                             value={this.state.value}
                             onChange={this.handleValueChange}
-                            placeholder="Valor"
-                        ></input>
-                    </p>
+                        ></TextField>
+                    </span>
 
-                    <p>
-                        <input
+                    <span>
+                        <TextField
+                            id="standard-basic"
+                            label="Métodos de pagamento"
+                            title="Lembre-se de separá-los por vírgula"
                             value={this.state.paymentMethods}
                             onChange={this.handlePaymentChange}
-                            placeholder="Forma de pagamento"
-                        ></input>
-                    </p>
+                        ></TextField>
+                    </span>
 
-                    <p>
-                        <input
+                    <span>
+                        <label htmlFor="">
+                            A data final para que seu serviço seja feito:
+                        </label>
+                        <TextField
                             value={this.state.dueDate}
                             onChange={this.handleDateChange}
-                            placeholder="Data"
                             type="date"
-                        ></input>
-                    </p>
+                        ></TextField>
+                    </span>
 
-                    <p>
+                    <span>
                         <button onClick={this.handleCreateJob}>
-                            Cadastre-se
+                            CADASTRAR MEU SERVIÇO
                         </button>
-                    </p>
+                    </span>
                 </div>
-            </div>
+            </Container>
         );
     }
 }

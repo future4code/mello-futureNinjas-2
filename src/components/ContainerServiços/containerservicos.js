@@ -64,7 +64,7 @@ export default class ServicesContainer extends React.Component {
         if (e.target.value === 'crescente') {
             this.setState({
                 jobs: [...this.state.jobs].sort(function (a, b) {
-                    if (a.title < b.title) {
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
                         return -1;
                     }
                     if (a.title > b.title) {
@@ -76,10 +76,10 @@ export default class ServicesContainer extends React.Component {
         } else if (e.target.value === 'decrescente') {
             this.setState({
                 jobs: [...this.state.jobs].sort(function (a, b) {
-                    if (a.title < b.title) {
+                    if (a.title.toLowerCase() < b.title.toLowerCase()) {
                         return 1;
                     }
-                    if (a.title > b.title) {
+                    if (a.title.toLowerCase() > b.title.toLowerCase()) {
                         return -1;
                     }
                     return 0;
@@ -138,7 +138,14 @@ export default class ServicesContainer extends React.Component {
                 `https://us-central1-labenu-apis.cloudfunctions.net/futureNinjasTwo/jobs/${items.id}`
             );
         }
+        this.state.takenJobs.length > 1
+            ? alert(
+                  'Você pegou esses trabalhos, entre em contato com os clientes'
+              )
+            : alert('Você pegou esse trabalho, entre em contato com o cliente');
         this.setState({ takenJobs: [] });
+
+        setTimeout(() => window.location.reload(), 3000);
     };
 
     render() {
@@ -231,7 +238,9 @@ export default class ServicesContainer extends React.Component {
                         ))}
                     </div>
                     <button onClick={this.takeAllJobs}>
-                        ACEITAR TRABALHOS
+                        {this.state.takenJobs.length > 1
+                            ? 'ACEITAR TRABALHOS'
+                            : 'ACEITAR TRABALHO'}
                     </button>
                 </JobCart>
                 <Container>
