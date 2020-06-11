@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const PopUp = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const Container = styled.div`
     display: flex;
@@ -20,6 +29,9 @@ export const ServiceCard = styled.div`
     background: #ffffff;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 1px #00000021;
+    position: relative;
+    animation-name: ${PopUp};
+    animation-duration: 1s;
 
     span {
         display: flex;
@@ -50,7 +62,7 @@ export const ServiceCard = styled.div`
 
 export const Filters = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: row;
     align-items: center;
 
@@ -81,6 +93,8 @@ export const JobCart = styled.div`
     z-index: 2;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
+    animation-name: ${PopUp};
+    animation-duration: 1s;
 
     ::-webkit-scrollbar {
         display: none;

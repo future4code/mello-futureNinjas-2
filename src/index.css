@@ -7,6 +7,21 @@ body {
     -moz-osx-font-smoothing: grayscale;
     background-color: #e9ecf1;
     scroll-behavior: smooth;
+    transition: all 1s ease;
+
+    animation: animate;
+    animation-duration: 5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes animate {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 code {

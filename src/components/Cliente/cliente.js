@@ -30,12 +30,11 @@ export default class Cliente extends Component {
         return (
             <>
                 <Fab
-                    style={{ position: 'sticky', left: 5, top: 10 }}
+                    style={{ position: 'relative' }}
                     variant="extended"
                     onClick={() =>
                         this.setState({ toggle: !this.state.toggle })
                     }
-                    href="#filters"
                 >
                     Filtros
                 </Fab>
