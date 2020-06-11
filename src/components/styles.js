@@ -4,7 +4,6 @@ export const Header = styled.header`
     display: flex;
     width: 100%;
     align-items: center;
-    justify-content: space-around;
     background: green;
     height: 100px;
 
@@ -13,22 +12,6 @@ export const Header = styled.header`
         left: 100px;
         bottom: 10%;
         cursor: pointer;
-    }
-
-    nav {
-        display: flex;
-        margin-left: 50%;
-        list-style: none;
-    }
-
-    nav * {
-        margin: 0 15px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    nav *:hover {
-        color: white;
     }
 `;
 

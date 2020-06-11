@@ -80,8 +80,19 @@ export class Profissional extends Component {
                     </h4>
                     <h4>{this.state.paymentMethods}</h4>
                     <h4>
-                        {this.state.dueDate.length > 0 ? 'Prazo Final: ' : ''}
-                        {this.state.dueDate}
+                        {this.state.dueDate.length > 0 ? "Prazo Final: " + (Number(new Date(this.state.dueDate).getDate()) +
+                            1 +
+                            '/' +
+                            (Number(new Date(this.state.dueDate).getMonth()) +
+                                1 <
+                            10
+                                ? '0'
+                                : '') +
+                            (Number(new Date(this.state.dueDate).getMonth()) +
+                                1) +
+                            '/' +
+                            new Date(this.state.dueDate).getFullYear())  : ''}
+                        
                     </h4>
                     <img src={Logo} alt="logo" />
                 </ServiceCard>
