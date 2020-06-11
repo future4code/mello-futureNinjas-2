@@ -63,6 +63,7 @@ export const BotaoRosa = styled.button`
     font-size: 20px;
     border-radius: 12px;
     cursor: pointer;
+    margin: 30px;
 `;
 
 export const BotaoVerde = styled.button`
@@ -73,18 +74,21 @@ export const BotaoVerde = styled.button`
     font-size: 20px;
     border-radius: 12px;
     cursor: pointer;
+    margin: 30px auto;
 `;
 
 export const BtnWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    height: 100px;
-    justify-content: space-evenly;
+    align-items: center;
+    height: 500px;
     margin-top: 300px;
+    justify-content: center;
 `;
 
 export const Wrapper = styled.div`
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: center;
     align-items: center;
 `;
