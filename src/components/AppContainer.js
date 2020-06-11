@@ -83,13 +83,10 @@ export class AppContainer extends Component {
                 >
                     <img src={Logo} alt="logo" onClick={this.goToLanding} />
                     <nav>
-                        <li>Home</li>
+                        <li onClick={this.goToLanding}>Home</li>
                         <li
                             style={{
-                                color:
-                                    this.state.pages === 1
-                                        ? 'white'
-                                        : '',
+                                color: this.state.pages === 1 ? 'white' : '',
                             }}
                             onClick={this.goToConsumer}
                         >
@@ -97,10 +94,7 @@ export class AppContainer extends Component {
                         </li>
                         <li
                             style={{
-                                color:
-                                    this.state.pages === 2
-                                        ? 'white'
-                                        : '',
+                                color: this.state.pages === 2 ? 'white' : '',
                             }}
                             onClick={this.goToProfessional}
                         >

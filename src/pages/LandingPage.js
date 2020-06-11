@@ -13,7 +13,7 @@ const Home = styled.div`
 `;
 
 const Logo = styled.img`
-    width: 500px;
+    width: 400px;
     grid-column: 3;
     grid-row: 5;
 `;
