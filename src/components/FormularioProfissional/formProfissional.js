@@ -4,8 +4,11 @@ import { Container } from './styles';
 import { TextField } from '@material-ui/core';
 import { ServiceCard } from '../ContainerServiços/styles';
 import Logo from '../../assets/logoBIG.svg';
-import isFuture from 'date-fns/isFuture';
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, isPast, isToday } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
+window.__localeId__ = 'ptBR';
+const locales = { ptBR };
 
 export class Profissional extends Component {
     state = {
@@ -17,8 +20,11 @@ export class Profissional extends Component {
     };
 
     handleCreateJob = () => {
-        if (isFuture(this.state.dueDate)) {
-            alert('Essa data já passou ou não está disponível.');
+        if (
+            isPast(parseISO(this.state.dueDate)) ||
+            isToday(parseISO(this.state.dueDate))
+        ) {
+            alert('Selecione apenas datas a partir de hoje.');
         } else if (this.state.description === '') {
             alert('Adicione uma descrição ao serviço que você deseja.');
         } else if (this.state.value === '') {
@@ -98,7 +104,10 @@ export class Profissional extends Component {
                             ? 'Prazo Final: ' +
                               format(
                                   parseISO(this.state.dueDate),
-                                  "'Dia' dd 'de' MMMM 'de' yyyy'"
+                                  "'Dia' dd 'de' MMMM 'de' yyyy'",
+                                  {
+                                      locale: locales[window.__localeId__],
+                                  }
                               )
                             : ''}
                     </h4>
@@ -132,7 +141,7 @@ export class Profissional extends Component {
 
                     <span>
                         <TextField
-                            label="Métodos de pagamento"
+                            label="Formas de pagamento"
                             title="Lembre-se de separá-los por vírgula"
                             value={this.state.paymentMethods}
                             onChange={this.handlePaymentChange}

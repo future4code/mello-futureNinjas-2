@@ -15,6 +15,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Fab, NativeSelect } from '@material-ui/core';
 import { parseISO, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
+window.__localeId__ = 'ptBR'
+const locales = { ptBR };
 
 export default class ServicesContainer extends React.Component {
     constructor(props) {
@@ -315,7 +319,13 @@ export default class ServicesContainer extends React.Component {
                                             Prazo final:{' '}
                                             {format(
                                                 parseISO(item.dueDate),
-                                                "'Dia' dd 'de' MMMM 'de' yyyy'"
+                                                "'Dia' dd 'de' MMMM 'de' yyyy'",
+                                                {
+                                                    locale:
+                                                        locales[
+                                                            window.__localeId__
+                                                        ],
+                                                }
                                             )}
                                         </p>
                                         <p>Métodos de pagamento:</p>
