@@ -26,7 +26,7 @@ FutureNinjas
 -   💅 - **CSS** — styled-components
 -   💖 - **Lint** — ESlint/Prettier/Editor Config
 -   🕐 - **Date-Fns** — Consistent toolset for manipulating JavaScript dates
--   🎶 - **Material UI** -- A components library for fast and easy development
+-   🎶 - **Material UI** — A components library for fast and easy development
 
 ## Deploy
 
