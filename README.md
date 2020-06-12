@@ -22,11 +22,11 @@ Leezer - A mini playlist creator
 
 ## Features
 
--   ⚛ **React** — A library to build user interfaces
--   💅 **CSS** — styled-components
--   💖 **Lint** — ESlint/Prettier/Editor Config
--   🕐 **Date-Fns** — Consistent toolset for manipulating JavaScript dates
--   🎶 **Material UI** - A components library for fast and easy development
+-   ⚛  -**React** — A library to build user interfaces
+-   💅 -**CSS** — styled-components
+-   💖 -**Lint** — ESlint/Prettier/Editor Config
+-   🕐 -**Date-Fns** — Consistent toolset for manipulating JavaScript dates
+-   🎶 -**Material UI** - A components library for fast and easy development
 
 ## Deploy
 
@@ -34,8 +34,8 @@ Leezer - A mini playlist creator
 
 ## Creators
 
--- Alexandre Gessone
--- Ana Irala
--- Diego Molinari
--- Henrique Botelho
--- Victor Gutierrez
+-   Alexandre Gessone
+-   Ana Irala
+-   Diego Molinari
+-   Henrique Botelho
+-   Victor Gutierrez
