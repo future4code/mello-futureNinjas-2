@@ -15,6 +15,8 @@ const Logo = styled.img`
     width: 500px;
     grid-column: 3;
     grid-row: 5;
+    grid-row-start:2;
+   
 `;
 
 class LandingPage extends Component {
