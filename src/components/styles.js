@@ -81,8 +81,6 @@ export const BtnWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    margin-top: 300px;
     justify-content: center;
 `;
 
@@ -90,5 +88,6 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    align-items: center;
+    width: 100%;
+    height: 100vh;
 `;

@@ -9,7 +9,6 @@ import {
 } from './styles';
 import Logo from '../assets/logo.svg';
 import LogoBIG from '../assets/logoBIG.svg';
-import LandingPage from './../pages/LandingPage';
 import Consumidor from './../pages/Consumidor';
 import Profissional from '../pages/Profissional';
 
@@ -42,9 +41,7 @@ export class AppContainer extends Component {
             case 0:
                 return (
                     <Wrapper>
-                        <LandingPage
-                            style={{ display: this.ShouldIRender() }}
-                        />
+                        <img style={{ width: 600 }} src={LogoBIG} alt="" />
                         <BtnWrapper>
                             <BotaoRosa onClick={this.goToConsumer}>
                                 Quero me candidatar
@@ -60,7 +57,19 @@ export class AppContainer extends Component {
             case 2:
                 return <Profissional />;
             default:
-                return <LandingPage />;
+                return (
+                    <Wrapper style={{ display: this.ShouldIRender() }}>
+                        <img src={LogoBIG} alt="" />
+                        <BtnWrapper>
+                            <BotaoRosa onClick={this.goToConsumer}>
+                                Quero me candidatar
+                            </BotaoRosa>
+                            <BotaoVerde onClick={this.goToProfessional}>
+                                Quero criar uma oferta
+                            </BotaoVerde>
+                        </BtnWrapper>
+                    </Wrapper>
+                );
         }
     };
 
